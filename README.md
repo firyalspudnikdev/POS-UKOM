@@ -1,6 +1,7 @@
 
 <h1 style="font-size:15px">Dokumen User Requiretment Link : https://docs.google.com/document/d/1okzW7BBRutMmXoz2HEhTwXI9KMhIcvBB/edit?usp=sharing&ouid=111462069413593262779&rtpof=true&sd=true</h1>
 <h1 style="font-size:15px">Dokumen Project Charter Link : https://docs.google.com/document/d/1NdDQZYChqQeoiUCHUyGjj_Fa78Oft19z8b-NL60BU3c/edit?usp=sharing</h1>
+<h1 style="font-size:15px">Dokumen Automated Testing Link : https://docs.google.com/document/d/1nxB_nXByf7iD30jXKD_ikxS44LMdBZw0d-yS7hHf2P4/edit?usp=sharing</h1>
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
