@@ -15,6 +15,8 @@
     <div class="hidden-text" id="status-text"></div>
 
     <form id="myForm">
+        <input type="hidden" id="action" name="action" value="create" >
+        <input type="hidden" id="idTransaksi" name="id_transaksi" value="" >
         <div>
             <label for="id_pelanggan">Nama Pelanggan :</label>
             <select id="id_pelanggan" name="id_pelanggan" required>
@@ -83,7 +85,8 @@
                         displayTransaksi(response.data);
                     },
                     error: function(xhr, status, error) {
-                        displayMessage("Error: " + xhr.status);
+                        // console.log("error: " + xhr.responseJSON.message);
+                        displayMessage("Error: " + xhr.responseJSON.message);
                     }
                 });
             });
@@ -106,6 +109,7 @@
                     });
                 },
                 error: function(xhr, status, error) {
+              
                     displayMessage("Error: " + xhr.status);
                 }
             });
@@ -124,7 +128,8 @@
             newRow.append("<td>" + formattedDate + "</td>");
 
             // Tambahkan tombol edit dan delete ke dalam baris
-            newRow.append("<td><button class='edit-btn' data-id='" + data.id_transaksi + "'>Edit</button> <button class='delete-btn' data-id='" + data.id_transaksi + "'>Delete</button></td>");
+            newRow.append("<td><button class='edit-btn' data-id='" + data.id_transaksi +
+                "'>Edit</button> <button class='delete-btn' data-id='" + data.id_transaksi + "'>Delete</button></td>");
 
             transaksiTable.append(newRow);
         }
@@ -168,8 +173,25 @@
         // Tambahkan event listener untuk tombol edit dan delete
         $(document).on("click", ".edit-btn", function() {
             var idTransaksi = $(this).data("id");
-            window.location.href = "{{ url('transaksi') }}/" + idTransaksi + "/edit";
+            // Memuat data transaksi berdasarkan ID
+            $.ajax({
+                type: "GET",
+                url: "{{ url('transaksi') }}/" + idTransaksi,
+                success: function(response) {
+                    console.log("response edit:"+response);
+                    // Mengisi formulir dengan data transaksi yang diperoleh
+                    $("#id_pelanggan").val(response.data.id_pelanggan);
+                    $("#jumlah").val(response.data.jumlah);
+                    $("#id_barang").val(response.data.id_barang);
+                    $("#action").val("edit");
+                    $("#idTransaksi").val(idTransaksi);
+                },
+                error: function(xhr, status, error) {
+                    displayMessage("Error: " + xhr.status);
+                }
+            });
         });
+
 
         $(document).on("click", ".delete-btn", function() {
             var idTransaksi = $(this).data("id");

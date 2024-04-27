@@ -18,4 +18,5 @@ use App\Http\Controllers\TransaksiController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/transaksi', [TransaksiController::class, 'store'])->name('transaksi.store');
 Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transaksi.index');
-
+Route::delete('/transaksi/{id}', [TransaksiController::class, 'delete']);
+Route::get('transaksi/{id}', [TransaksiController::class, 'edit']);
