@@ -50,8 +50,8 @@
         <thead>
             <tr>
                 <th>ID Transaksi</th>
-                <th>ID Pelanggan</th>
-                <th>ID Barang</th>
+                <th>Nama Pelanggan</th>
+                <th>Nama Barang</th>
                 <th>Jumlah</th>
                 <th>Tanggal Transaksi</th>
                 <th>Action</th> <!-- Tambahkan kolom action -->
