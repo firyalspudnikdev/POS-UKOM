@@ -54,6 +54,7 @@
                 <th>ID Barang</th>
                 <th>Jumlah</th>
                 <th>Tanggal Transaksi</th>
+                <th>Action</th> <!-- Tambahkan kolom action -->
             </tr>
         </thead>
         <tbody>
@@ -122,6 +123,9 @@
             var formattedDate = formatDate(createdAt);
             newRow.append("<td>" + formattedDate + "</td>");
 
+            // Tambahkan tombol edit dan delete ke dalam baris
+            newRow.append("<td><button class='edit-btn' data-id='" + data.id_transaksi + "'>Edit</button> <button class='delete-btn' data-id='" + data.id_transaksi + "'>Delete</button></td>");
+
             transaksiTable.append(newRow);
         }
 
@@ -160,6 +164,33 @@
 
             return day + ' ' + months[monthIndex] + ' ' + year + ' ' + hours + ':' + minutes + ':' + seconds;
         }
+
+        // Tambahkan event listener untuk tombol edit dan delete
+        $(document).on("click", ".edit-btn", function() {
+            var idTransaksi = $(this).data("id");
+            window.location.href = "{{ url('transaksi') }}/" + idTransaksi + "/edit";
+        });
+
+        $(document).on("click", ".delete-btn", function() {
+            var idTransaksi = $(this).data("id");
+            if (confirm("Are you sure you want to delete this transaction?")) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: "DELETE",
+                    url: "{{ url('transaksi') }}/" + idTransaksi,
+                    success: function(response) {
+                        loadTransaksi();
+                    },
+                    error: function(xhr, status, error) {
+                        displayMessage("Error: " + xhr.status);
+                    }
+                });
+            }
+        });
     </script>
 </body>
 
