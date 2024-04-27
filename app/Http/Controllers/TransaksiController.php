@@ -83,6 +83,10 @@ class TransaksiController extends Controller
                 // Cek stok barang
                 $barang = Barang::where('id_barang', $request->id_barang)->first();
                 if ($barang->stock < $request->jumlah) {
+                    $errorLog = new ErorLog();
+                    $errorLog->eror_code = '400';
+                    $errorLog->eror_desc = 'Stok barang dengan ID ' . $id_barang . ' tidak mencukupi untuk jumlah yang diminta.';
+                    $errorLog->save();
                     return response()->json(['message' => 'Stok barang tidak mencukupi'], 400);
                 }
         
